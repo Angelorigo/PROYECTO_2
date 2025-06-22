@@ -15,32 +15,28 @@ struct Objeto {
     int id;
     double peso;
     double valor;
-    double relacionValorPeso;
-};
+    double relacionValorPeso;};
 
-// Ordenar objetos por relación valor/peso descendente
 bool comparar(Objeto a, Objeto b) {
-    return a.relacionValorPeso > b.relacionValorPeso;
-}
+    return a.relacionValorPeso > b.relacionValorPeso;}
 
 int main() {
     int n;
     double capacidad;
-    cout << "Número de objetos: ";
+    cout << "Hola, cuantos objetos quisieras meter en tu mochila?: ";
     cin >> n;
 
     vector<Objeto> objetos(n);
 
     for (int i = 0; i < n; i++) {
-        cout << "Peso del objeto " << i + 1 << ": ";
+        cout << "\nCuanto pesa el objeto " << i + 1 << "?" << endl;
         cin >> objetos[i].peso;
-        cout << "Valor del objeto " << i + 1 << ": ";
+        cout << "Cual es el valor del objeto " << i + 1 << "?" << endl;
         cin >> objetos[i].valor;
         objetos[i].id = i + 1;
-        objetos[i].relacionValorPeso = objetos[i].valor / objetos[i].peso;
-    }
+        objetos[i].relacionValorPeso = objetos[i].valor / objetos[i].peso;}
 
-    cout << "Peso máximo de la mochila: ";
+    cout << "Cual es el peso máximo de tu mochila?" << endl;
     cin >> capacidad;
 
     sort(objetos.begin(), objetos.end(), comparar);
@@ -48,25 +44,18 @@ int main() {
     double pesoActual = 0.0;
     double valorTotal = 0.0;
 
-    cout << "\nObjetos seleccionados:\n";
+    cout << "\nLos objetos que pondremos en la mochila son:\n";
 
     for (int i = 0; i < n && pesoActual < capacidad; i++) {
         if (pesoActual + objetos[i].peso <= capacidad) {
-            // Se mete el objeto completo
             pesoActual += objetos[i].peso;
             valorTotal += objetos[i].valor;
             cout << " - Objeto " << objetos[i].id << " (completo)" << endl;
         } else {
-            // Se mete fracción del objeto
             double fraccion = (capacidad - pesoActual) / objetos[i].peso;
             pesoActual += objetos[i].peso * fraccion;
             valorTotal += objetos[i].valor * fraccion;
-            cout << " - Objeto " << objetos[i].id << " (" << fraccion * 100 << "% del objeto)" << endl;
-        }
-    }
+            cout << " - Objeto " << objetos[i].id << " (" << fraccion * 100 << "/100 del objeto)" << endl;}}
 
-    cout << "\nValor máximo que se puede obtener: " << valorTotal << endl;
-
-    return 0;
-}
-
+    cout << "\nEl valor total de lo que cupo en tu mochila es: " << valorTotal << endl;
+    return 0;}

@@ -16,12 +16,12 @@ int FibonacciDinamico(int n) {
         return 1;
     if (Tabla[n] == 0) 
         Tabla[n] = FibonacciDinamico(n - 1) + FibonacciDinamico(n - 2);
-    return Tabla[n];
-}
+    return Tabla[n];}
 
 int main() {
     int n;
-    cout << "Introduce el valor de n: ";
+    cout << "Hola, vamos a calcular la funcion de fibonacci con programacion dinamica." << endl;
+    cout << "Por favor, introduce el valor de n: ";
     cin >> n;
 
     for (int i = 0; i <= n; ++i)
@@ -30,6 +30,4 @@ int main() {
     int resultado = FibonacciDinamico(n);
     cout << "El Fibonacci dinamico de " << n << " es: " << resultado << endl;
 
-    return 0;
-}
-
+    return 0;}

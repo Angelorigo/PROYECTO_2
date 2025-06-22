@@ -11,18 +11,17 @@
 using namespace std;
 
 const int NumDen = 3;
-const int MontoMax = 100; // Límite superior para el monto
-int denominaciones[NumDen] = {1, 4, 6};
+const int MontoMax = 100; // Límite para el monto, por temas de procesamiento.
+int denominaciones[NumDen] = {1, 5, 9};
 
 int CambioPorDinamica(int monto, vector<int>& monedasUsadas) {
     int C[NumDen][MontoMax + 1];
     int decision[NumDen][MontoMax + 1];
-
-    // Inicializamos la primera fila
+   
     for (int j = 0; j <= monto; j++) {
         C[0][j] = j;
         decision[0][j] = 1; // Solo monedas de 1
-    }
+ }
 
     for (int i = 1; i < NumDen; i++) {
         for (int j = 0; j <= monto; j++) {
@@ -39,10 +38,7 @@ int CambioPorDinamica(int monto, vector<int>& monedasUsadas) {
                 } else {
                     C[i][j] = sinUsar;
                     decision[i][j] = 0; // no se usó moneda i
-                }
-            }
-        }
-    }
+                }}}}
 
     // Recuperar qué monedas se usaron
     int i = NumDen - 1;
@@ -52,33 +48,27 @@ int CambioPorDinamica(int monto, vector<int>& monedasUsadas) {
             monedasUsadas.push_back(denominaciones[i]);
             j -= denominaciones[i];
         } else {
-            i--;
-        }
-    }
+            i--;}}
 
-    return C[NumDen - 1][monto];
-}
+    return C[NumDen - 1][monto];}
 
 int main() {
     int monto;
-    cout << "Ingrese el monto a cambiar: ";
+    cout << "+ Wenas joven, cuanto le vamos a cambiar? " << endl;
+    cout << "- Buenos días, quisiera que me cambie $";
     cin >> monto;
 
     if (monto < 0 || monto > MontoMax) {
-        cout << "Monto inválido. Debe estar entre 0 y " << MontoMax << endl;
-        return 1;
-    }
+        cout << "Como asi joven? solo le puedo cambiar entre $0 y $" << MontoMax << endl;
+        return 1;}
 
     vector<int> monedasUsadas;
     int resultado = CambioPorDinamica(monto, monedasUsadas);
-    cout << "El mínimo número de monedas para lograr $" << monto << " es: " << resultado << endl;
+    cout << "El mínimo número de monedas para juntarle sus $" << monto << ", es: " << resultado << endl;
 
-    cout << "Monedas usadas: ";
+    cout << "Aqui tiene, son: ";
     for (int moneda : monedasUsadas) {
-        cout << "$" << moneda << " ";
-    }
+        cout << "$" << moneda << " "; }
     cout << endl;
 
-    return 0;
-}
-
+    return 0;}
