@@ -1,3 +1,2 @@
 Para visualizar los cálculos de T(n) y O(n), ingrese al siguiente  documento compartido:
-
 https://docs.google.com/document/d/18VOfylam8tXFDdSAS27xpis2-pYzS4WD04s2Ol1rGWg/edit?usp=sharing
