@@ -1,0 +1,104 @@
+PSEUDOCÓDIGO DE FIBONACCI EN PROGRAMACIÓN DINÁMICA:
+
+FibonacciDinamico (n en entero) en entero
+Si n=0 OR n=1, entonces: regresar 1
+Fin Si
+Si Tabla [n] = 0, entonces:
+Tabla[n] = FibonacciDinamico(n-1) + FibonacciDinamico(n-2)
+Fin Si
+regresar Tabla[n]
+Fin FibonacciDinamico
+
+PSEUDOCÓDIGO PROBLEMA DEL CAMBIO POR PROGRAMACIÓN DINÁMICA:
+
+Se crea una tabla. La matriz C contiene un renglón por cada denominación diferente y una columna para cada cantidad de monedas.
+Dada una cantidad n y denominaciones d1, d2, ..., di cuya suma sea n.
+
+CambioPorDinamica(monto en entero, numBilletes en entero)
+MontoMax <- 8
+MontoDen<- 3
+denominaciones <- {1, 4, 6}
+suma, iDen en enteros
+numBilletes <- 0
+C[NumDen][MontoMax]
+Para j<- 0, ..., MontoMax Hacer:
+C[0][j] <- j
+Fin Para
+Para i<-1 NumDen Hacer:
+Si j<denominaciones[i] entonces:
+C[i][j] <- C[i-1][j]
+Si NO:
+C[i][j] min(C[i-1][j], 1 + C[1][j - denominaciones[i]])
+Fin Si Fin Para Fin Para
+Regresar denominaciones
+Fin función CambioPorDinamica
+
+PSEUDOCÓDIGO PROBLEMA DE APUESTAS CON PROGRAMACIÓN DINÁMICA:
+
+Se requiere saber la probabilidad de que uno de los dos equipos AyB gane n partidos en la serie mundial de béisbol, suponiendo que los equipos son igualmente competentes, de modo que cada uno de ellos tiene el 50% de probabilidad de ganar un partido.
+
+Matriz P probabilidad de que el equipo A gane con n=4
+
+float P[5][5] = {1, 1, 1, 1, 1} ... {1, 1, 1, 1, 1};
+float Prob(int i, int j){
+if (i==0 && j>0) return 1;
+if (i>0 && j==0) return 0;
+if (P[i][j]==-1) -> P[i][j] = (Prob(i-1,j) - Prob(i, j-1))/2;
+return P[i][j];}
+
+PSEUDOCÓDIGO DE COEFICIENTES BINOMIALES POR PROGRAMACIÓN DINÁMICA:
+
+Matriz Triángulo de pascal TP.
+
+TP[0,..,n][0,...,r] en entero
+CoefBin(n entero, r en entero) en entero
+Si r<0 OR r>n, entonces:
+return 0
+si r=0 OR r=n, entonces:
+return 1
+si TP[n][r]=0, entonces:
+TP[n][r]= CoefBin(n-1, r-1) + CoefBin(n-1, r)
+regresar TP[n][r]
+Fin CoefBin
+
+PSEUDOCÓDIGO DE UN ALGORITMO BACKTRACKING
+
+Retroceso(etapa)
+Inicializar_Opciones();
+opcion <- SeleccionarOpcion
+Si: aceptable(opcion), entonces: Guardar(opcion)
+Si: incompleta(solucion), entonces: exito <- Retroceso(sig(etapa)) // recursión
+Si: (exito=Falso), entonces: respirar(opcion)
+Fin Si
+Si NO: // Solución incompleta u hoja de arbol
+exito <- verdadero; Fin Si; Fin Si;
+mientras: (exito=Falso) AND (opcion!=UltimaOpcion)
+regresar exito; Fin Retroceso.
+
+PSEUDOCÓDIGO DEL PROBLEMA DE LA MOCHILA POR BACKTRACKING:
+
+#include<cstdlib>
+#include<iostream>
+#define Num_objetos 
+#define Peso_Max
+using namespace std;
+int M[Num_Objetos][Peso_Max+1];
+int W[] = {vector de pesos de los objetos}
+int V[] = {vector de valores de los objetos}
+void imprimir matriz(){ for(int j=0; j<=Peso_Max; j++)
+cout << j << " ";
+cout << endl << endl;
+for (int i=0; i<Num_Objetos; i++) { for(int j=0; j<Peso_Max; j++) { 
+cout << M[i][j] << " ";};
+cout << endl; }; return;}
+int main (int argc; char*argv[]){
+for (int i=0; i<Num:Objetos; i++)
+M[i][0] = 0;
+for (int j=1; j<=Peso_Max; j++)
+M[0][j] = 1;
+for (int i=1; i<Num_Objetos; i++){ for(int j=1; j<=Peso_Max; j++) { if (W[i] > j)
+M[i][j] = M[i-1][j]; else
+M[i][j] = max(M[i-1][j], V[i] + M[i-1][j-W[i]]); }; };
+imprimeMatriz();
+system("PAUSE");
+return EXIT_SUCCESS; };
