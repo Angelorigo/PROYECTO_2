@@ -7,53 +7,65 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
+
 using namespace std;
 
-// Variables globales
-int pesoMaximo;
-vector<int> pesos;
-vector<int> valores;
-int numObjetos;
-int mejorValor = 0;
+struct Objeto {
+    int id;
+    double peso;
+    double valor;
+    double relacionValorPeso;
+};
 
-// Función Backtracking
-void mochilaBT(int index, int pesoActual, int valorActual) {
-    if (pesoActual > pesoMaximo) return;
-
-    if (index == numObjetos) {
-        if (valorActual > mejorValor)
-            mejorValor = valorActual;
-        return;
-    }
-
-    // Caso 1: incluir el objeto index
-    mochilaBT(index + 1, pesoActual + pesos[index], valorActual + valores[index]);
-
-    // Caso 2: no incluir el objeto index
-    mochilaBT(index + 1, pesoActual, valorActual);
+// Ordenar objetos por relación valor/peso descendente
+bool comparar(Objeto a, Objeto b) {
+    return a.relacionValorPeso > b.relacionValorPeso;
 }
 
 int main() {
-    cout << "Ingrese el número de objetos: ";
-    cin >> numObjetos;
+    int n;
+    double capacidad;
+    cout << "Número de objetos: ";
+    cin >> n;
 
-    pesos.resize(numObjetos);
-    valores.resize(numObjetos);
+    vector<Objeto> objetos(n);
 
-    for (int i = 0; i < numObjetos; i++) {
+    for (int i = 0; i < n; i++) {
         cout << "Peso del objeto " << i + 1 << ": ";
-        cin >> pesos[i];
+        cin >> objetos[i].peso;
         cout << "Valor del objeto " << i + 1 << ": ";
-        cin >> valores[i];
+        cin >> objetos[i].valor;
+        objetos[i].id = i + 1;
+        objetos[i].relacionValorPeso = objetos[i].valor / objetos[i].peso;
     }
 
-    cout << "Ingrese el peso máximo de la mochila: ";
-    cin >> pesoMaximo;
+    cout << "Peso máximo de la mochila: ";
+    cin >> capacidad;
 
-    // Llamar a la función de backtracking
-    mochilaBT(0, 0, 0);
+    sort(objetos.begin(), objetos.end(), comparar);
 
-    cout << "El valor máximo que se puede obtener es: " << mejorValor << endl;
+    double pesoActual = 0.0;
+    double valorTotal = 0.0;
+
+    cout << "\nObjetos seleccionados:\n";
+
+    for (int i = 0; i < n && pesoActual < capacidad; i++) {
+        if (pesoActual + objetos[i].peso <= capacidad) {
+            // Se mete el objeto completo
+            pesoActual += objetos[i].peso;
+            valorTotal += objetos[i].valor;
+            cout << " - Objeto " << objetos[i].id << " (completo)" << endl;
+        } else {
+            // Se mete fracción del objeto
+            double fraccion = (capacidad - pesoActual) / objetos[i].peso;
+            pesoActual += objetos[i].peso * fraccion;
+            valorTotal += objetos[i].valor * fraccion;
+            cout << " - Objeto " << objetos[i].id << " (" << fraccion * 100 << "% del objeto)" << endl;
+        }
+    }
+
+    cout << "\nValor máximo que se puede obtener: " << valorTotal << endl;
 
     return 0;
 }
