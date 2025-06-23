@@ -12,29 +12,29 @@ const int MAX = 100;
 int TP[MAX][MAX]; 
 
 int CoefBin(int n, int r) {
-    if (r < 0 || r > n)
-        return 0;
-    if (r == 0 || r == n)
-        return 1;
-    if (TP[n][r] != -1)
-        return TP[n][r];
+    if (r < 0 || r > n)	//  3 OE
+        return 0;	//  1 OE
+    if (r == 0 || r == n)	//  3 OE
+        return 1;	//  1 OE
+    if (TP[n][r] != -1)	//  3 OE
+        return TP[n][r];	//  2 OE
 
-    TP[n][r] = CoefBin(n - 1, r - 1) + CoefBin(n - 1, r);
-    return TP[n][r];}
+    TP[n][r] = CoefBin(n - 1, r - 1) + CoefBin(n - 1, r);	//  9 OE
+    return TP[n][r];}	//  2 OE
 
 int main() {
-        for (int i = 0; i < MAX; i++)
-        for (int j = 0; j < MAX; j++)
-            TP[i][j] = -1;
+        for (int i = 0; i < MAX; i++)	//  4 OE
+        for (int j = 0; j < MAX; j++)	//  4 OE
+            TP[i][j] = -1;	//  3 OE
 
     int n, r;
-    cout << "Calculemos el coeficiente binomial de (n, r), con n y r menores a 100:"<< endl;
-    cout << "Ingresa n: ";
-    cin >> n;
-    cout << "Ingresa r: ";
-    cin >> r;
+    cout << "Calculemos el coeficiente binomial de (n, r), con n y r menores a 100:"<< endl;	//  1 OE
+    cout << "Ingresa n: ";	//  1 OE
+    cin >> n;	//  1 OE
+    cout << "Ingresa r: ";	//  1 OE
+    cin >> r;	//  1 OE
 
-    int resultado = CoefBin(n, r);
-    cout << "El coeficiente binomial C(" << n << ", " << r << ") es: " << resultado << endl;
+    int resultado = CoefBin(n, r);	//  2 OE
+    cout << "El coeficiente binomial C(" << n << ", " << r << ") es: " << resultado << endl;	//  6 OE
 
-    return 0;}
+    return 0;}	//  1 OE
