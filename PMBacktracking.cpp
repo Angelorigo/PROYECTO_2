@@ -33,7 +33,7 @@ int main() {
         objetos[i].id = i + 1;	//  4 OE
         objetos[i].relacionValorPeso = objetos[i].valor / objetos[i].peso;}	//  5 OE
 
-    cout << "Cual es el peso máximo de tu mochila?" << endl;	//  1 OE
+    cout << "\nCual es el peso máximo de tu mochila?" << endl;	//  1 OE
     cin >> capacidad;	// 1 OE
 
     sort(objetos.begin(), objetos.end(), comparar);	//  1 OE
