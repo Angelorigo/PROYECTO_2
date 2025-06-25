@@ -102,3 +102,5 @@ M[i][j] = max(M[i-1][j], V[i] + M[i-1][j-W[i]]); }; };
 imprimeMatriz();
 system("PAUSE");
 return EXIT_SUCCESS; };
+
+EL ÚLTIMO PROGRAMA ES EL PROBLEMA DE LA MOCHILA POR RAMIFICACIÓN Y PODA
